@@ -13,18 +13,22 @@ job "hw" {
 
     task "hello" {
       driver = "raw_exec"
+
       artifact {
         source      = "https://s3.amazonaws.com/public-demo-assets/jake/nomad/simple_raw_exec/helloworld.war"
         destination = "/local/tomcat/webapps"
       }
+
       artifact {
         source      = "https://s3.amazonaws.com/public-demo-assets/jake/nomad/simple_raw_exec/server.xml"
-        destination = "/local//tomcat/conf"
+        destination = "/local/tomcat/conf"
       }
 
-      config {
-        command = "/usr/local/tomcat/bin/catalina.sh"
-        args    = ["run", "-config", "$NOMAD_TASK_DIR/tomcat/conf/server.xml"]
+      resources {
+        network {
+          mbits = 10
+          port "http" {}
+        }
       }
 
       env {
@@ -33,11 +37,9 @@ job "hw" {
         CATALINA_HOME = "/usr/local/tomcat"
       }
 
-      resources {
-        network {
-          mbits = 10
-          port "http" {}
-        }
+      config {
+        command = "/usr/local/tomcat/bin/catalina.sh"
+        args    = ["run", "-config", "$NOMAD_TASK_DIR/tomcat/conf/server.xml"]
       }
 
       service {
