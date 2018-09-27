@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="-1" shutdown="SHUTDOWN">
+
+  <Service name="Catalina">
+
+    <Connector port="${port.http}" protocol="HTTP/1.1" connectionTimeout="20000" />
+    <Engine name="Catalina" defaultHost="localhost">
+
+	    <Host name="localhost"  appBase="${default.context}/tomcat/webapps/"
+            unpackWARs="true" autoDeploy="true"
+            xmlValidation="false" xmlNamespaceAware="false">
+      </Host>
+
+    </Engine>
+  </Service> 
+</Server>
