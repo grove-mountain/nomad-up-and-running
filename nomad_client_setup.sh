@@ -6,6 +6,7 @@ wget http://apache.mirrors.lucidnetworks.net/tomcat/tomcat-7/v7.0.91/bin/apache-
 sudo tar -C /usr/local/ -xvf apache-tomcat-7.0.91.tar.gz
 sudo ln -s /usr/local/apache-tomcat-7.0.91 /usr/local/tomcat
 
+# overlay2 is enabled by default but doesn't work out the box.  For a demo, overlay is fine
 sudo sed -i -e 's/dockerd/dockerd --storage-driver=overlay/' /usr/lib/systemd/system/docker.service
 sudo systemctl daemon-reload
 sudo systemctl start docker

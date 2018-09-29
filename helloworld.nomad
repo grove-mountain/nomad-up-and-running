@@ -13,7 +13,7 @@ job "hw" {
 
     task "hello" {
       driver = "raw_exec"
-
+      # Grab the code from the public repo
       artifact {
         source      = "https://s3.amazonaws.com/public-demo-assets/jake/nomad/simple_raw_exec/helloworld.war"
         destination = "/local/tomcat/webapps"

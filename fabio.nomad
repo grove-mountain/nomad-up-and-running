@@ -15,6 +15,7 @@ job "fabio" {
         network {
           mbits = 10
 
+          # Put Fabio on a well known ports so ALB can reach it
           port "http" {
             static = 9999
           }
@@ -27,6 +28,7 @@ job "fabio" {
 
       config {
         image        = "fabiolb/fabio"
+        # Need host networking so Fabio can speak with the local Consul agent
         network_mode = "host"
 
         port_map {
